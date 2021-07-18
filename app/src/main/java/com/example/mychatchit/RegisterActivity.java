@@ -1,7 +1,13 @@
 package com.example.mychatchit;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -25,6 +33,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
+    private static final int MY_CAMERA_REQUEST_CODE = 2;
+    private static final int MY_RESULT_LOAD_IMAGE = 3;
+
     @BindView(R.id.edt_first_name)
     public EditText edt_first_name;
     @BindView(R.id.edt_last_name)
@@ -48,6 +59,13 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.btn_register)
     public Button btn_register;
 
+    @OnClick(R.id.img_avatar)
+    void onAvatarClick(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, MY_RESULT_LOAD_IMAGE);
+    }
+
     @OnClick(R.id.btn_register)
     void onRegisterClick(){
         if(!isEnterAllInfo()){
@@ -58,6 +76,27 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         UserModel userModel = new UserModel();
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MY_RESULT_LOAD_IMAGE){
+            if(resultCode == RESULT_OK){
+                try {
+                    final Uri imageUri =data.getData();
+                    InputStream inputStream =getContentResolver()
+                            .openInputStream(imageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    img_avatar.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "[ERROR]: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
