@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:gravity="center_horizontal"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_first_name"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/first_name"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+            <EditText
+                android:id="@+id/edt_last_name"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/last_name"
+                android:textColor="@color/black"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_phone"
+                android:layout_marginRight="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/phone"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_birthday"
+                android:layout_marginRight="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/birthday"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_gender"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/gender"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_status"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/status"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/edt_job"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edt_home"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/home"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edt_bio"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bio"
+                android:textColor="@color/black"
+                android:layout_marginEnd="5dp" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:background="@color/black"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</ScrollView>
