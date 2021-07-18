@@ -28,6 +28,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -49,4 +52,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     implementation 'com.karumi:dexter:6.2.3'
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }
