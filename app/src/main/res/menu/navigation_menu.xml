@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
+        <item android:title="@string/setting">
+            <menu>
+                <item android:id="@+id/dark_mode"
+                    android:title="@string/dark_mode"
+                    app:actionViewClass="android.widget.Switch"
+                    android:icon="@drawable/ic_dark_mode">
+                </item>
+                <item android:id="@+id/about_me"
+                    android:title="@string/about_me"
+                    android:icon="@drawable/ic_info">
+                </item>
+            </menu>
+        </item>
+    </group>
+</menu>
