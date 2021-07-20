@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView txt_edit_profile;
     private Switch btn_dark_mode;
 
+
+    int NightMode;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         img_avatar.setOnClickListener(this);
         txt_edit_profile.setOnClickListener(this);
         btn_dark_mode.setOnClickListener(this);
+
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        NightMode = sharedPreferences.getInt("NightModeInt", 1);
+        if(NightMode == AppCompatDelegate.MODE_NIGHT_YES){
+            btn_dark_mode.setChecked(true);
+        }else btn_dark_mode.setChecked(false);
+        AppCompatDelegate.setDefaultNightMode(NightMode);
     }
 
     @Override
@@ -74,13 +87,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void switchToDarkMode() {
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-            Toast.makeText(this, "Enable Dark Mode", Toast.LENGTH_SHORT).show();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            btn_dark_mode.setChecked(true);
-        }else{
-            Toast.makeText(this, "Disable Dark Mode", Toast.LENGTH_SHORT).show();
+        }else if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            btn_dark_mode.setChecked(false);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        NightMode = AppCompatDelegate.getDefaultNightMode();
+
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putInt("NightModeInt", NightMode);
+        editor.apply();
     }
 }
