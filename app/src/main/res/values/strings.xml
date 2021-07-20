@@ -14,4 +14,6 @@
     <string name="about_me">About me</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="setting">Setting</string>
+    <string name="personal_profile">Thông tin cá nhân</string>
+    <string name="save_info">Lưu thông tin</string>
 </resources>

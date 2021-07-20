@@ -3,6 +3,7 @@ package com.example.mychatchit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,12 +92,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
         NightMode = AppCompatDelegate.getDefaultNightMode();
 
         sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
@@ -105,4 +100,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         editor.putInt("NightModeInt", NightMode);
         editor.apply();
     }
+
 }

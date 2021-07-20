@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#1c2e46</color>
-    <color name="primary_dark">#142232</color>
+    <color name="primary">#757575</color>
+    <color name="primary_dark">#9E9E9E</color>
     <color name="input_background">#ececec</color>
     <color name="icon_background">#20ffffff</color>
     <color name="error">#b00020</color>
@@ -18,6 +18,8 @@
     <color name="main_background">#212121</color>
     <color name="second_background">#424242</color>
     <color name="third_background">#616161</color>
+    <color name="four_background">#757575</color>
+    <color name="five_background">#9E9E9E</color>
     <color name="primary_text">#ffffff</color>
     <color name="secondary_text">#FAFAFA</color>
     <color name="main_icon">#ffffff</color>
