@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener stateListener;
     private FirebaseDatabase database;
     private DatabaseReference userRef;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onStart() {
@@ -67,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        if(sharedPreferences != null)
+            AppCompatDelegate.setDefaultNightMode(sharedPreferences.getInt("NightModeInt", 1));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();

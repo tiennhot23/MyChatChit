@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     android:background="@color/main_background"
     tools:context=".HomeActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tab_layout"
+            android:layout_alignParentTop="true"
+            android:background="@color/main_background"
+            app:tabIndicatorColor="@color/primary_text"
+            app:tabSelectedTextColor="@color/primary_text"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabRippleColor="@null">
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tab_chat"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tab_people"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tab_explore"/>
+
+        </com.google.android.material.tabs.TabLayout>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"

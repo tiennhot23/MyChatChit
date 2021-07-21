@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/main_background"/>
-        </shape>
+        <color android:color="@color/main_background"/>
+    </item>
+    <item android:state_selected="false">
+        <layer-list>
+            <item android:gravity="bottom">
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/tab_indicator_text" />
+                    <size android:height="@dimen/_1sdp" />
+                </shape>
+            </item>
+        </layer-list>
     </item>
 </selector>
