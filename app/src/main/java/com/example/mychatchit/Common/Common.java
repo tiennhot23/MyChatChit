@@ -16,4 +16,8 @@ public class Common {
     public static final String NOTI_ROOM_ID = "room_id";
     public static final String NOTI_SENDER = "sender";
     public static final String NOTI_TITLE = "title";
+
+    public static final int MY_CAMERA_REQUEST_CODE = 2;
+    public static final int MY_RESULT_LOAD_IMAGE = 3;
+    public static final int LOGIN_REQUEST_CODE = 1;
 }

@@ -2,7 +2,7 @@ package com.example.mychatchit.Model;
 
 public class UserModel {
     private String uid, firstName, lastName,phone, status, gender, job, home, bio, avatar;
-    private double birthday;
+    private long birthday;
 
     public UserModel() {
     }
@@ -88,11 +88,11 @@ public class UserModel {
         this.avatar = avatar;
     }
 
-    public double isBirthday() {
+    public long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(double birthday) {
+    public void setBirthday(long birthday) {
         this.birthday = birthday;
     }
 }

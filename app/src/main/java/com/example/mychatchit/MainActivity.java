@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.mychatchit.Common.Common;
+import com.example.mychatchit.Common.Utils;
 import com.example.mychatchit.Model.UserModel;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int LOGIN_REQUEST_CODE = 1;
+
     private List<AuthUI.IdpConfig> providers;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener stateListener;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == LOGIN_REQUEST_CODE){
+        if(requestCode == Common.LOGIN_REQUEST_CODE){
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if(resultCode == RESULT_OK){
 
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
                 .setTheme(R.style.LoginTheme)
-                .setAvailableProviders(providers).build(), LOGIN_REQUEST_CODE);
+                .setAvailableProviders(providers).build(), Common.LOGIN_REQUEST_CODE);
     }
 
     private void checkUser(FirebaseUser user) {

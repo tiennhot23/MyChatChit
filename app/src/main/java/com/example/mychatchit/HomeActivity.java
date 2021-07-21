@@ -10,13 +10,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mychatchit.Common.Common;
 import com.google.android.material.navigation.NavigationView;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +27,7 @@ import butterknife.ButterKnife;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @BindView(R.id.navigation_view)
-    NavigationView navigationView;
+    public NavigationView navigationView;
 
 
     private LinearLayout headerMenu;
@@ -50,6 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         btn_dark_mode = (Switch) navigationView.getMenu().findItem(R.id.dark_mode).getActionView();
         headerMenu = navigationView.getHeaderView(0).findViewById(R.id.header_menu);
         img_avatar = headerMenu.findViewById(R.id.img_avatar);
+        Picasso.get().load(Common.currentUser.getAvatar()).into(img_avatar);
         txt_edit_profile = headerMenu.findViewById(R.id.txt_edit_profile);
         img_avatar.setOnClickListener(this);
         txt_edit_profile.setOnClickListener(this);

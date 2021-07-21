@@ -2,8 +2,12 @@ package com.example.mychatchit.Common;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Utils {
     public static String formatName(String name){
@@ -47,5 +51,17 @@ public class Utils {
         }
 
         return result;
+    }
+
+    public static boolean checkEmptyComponents(Object[] objects){
+        for(Object o : objects){
+            if(o instanceof EditText){
+                if (((EditText) o).getText().toString().trim().equals("")) {
+                    ((EditText) o).setError("Not Empty");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -37,8 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final int MY_CAMERA_REQUEST_CODE = 2;
-    private static final int MY_RESULT_LOAD_IMAGE = 3;
+
     private Uri fileUri;
 
     MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
@@ -77,12 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
     void onAvatarClick() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        startActivityForResult(intent, MY_RESULT_LOAD_IMAGE);
+        startActivityForResult(intent, Common.MY_RESULT_LOAD_IMAGE);
     }
 
     @OnClick(R.id.btn_register)
     void onRegisterClick() {
-        if (!isEnterAllInfo()) {
+        if(!Utils.checkEmptyComponents(new Object[]{edt_first_name, edt_last_name, edt_phone,
+                edt_birthday, edt_gender, edt_status, edt_home, edt_job, edt_bio})){
             return;
         }
         if (!Utils.checkNameRegex(edt_first_name.getText().toString())) {
@@ -97,10 +97,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         UserModel userModel = new UserModel();
         if (fileUri != null) {
-            String fileName = Utils.getFileName(getContentResolver(), fileUri);
             String firebaseStoragePath = new StringBuilder(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .append("/")
-                    .append(fileName)
+                    .append("avatar")
                     .toString();
             storageReference = FirebaseStorage.getInstance().getReference().child(firebaseStoragePath);
             UploadTask uploadTask = storageReference.putFile(fileUri);
@@ -172,7 +171,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MY_RESULT_LOAD_IMAGE) {
+        if (requestCode == Common.MY_RESULT_LOAD_IMAGE) {
             if (resultCode == RESULT_OK) {
                 try {
                     final Uri imageUri = data.getData();
@@ -221,39 +220,4 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isEnterAllInfo() {
-        if (edt_first_name.getText().toString().trim().equals("")) {
-            edt_first_name.setError("Not Empty");
-            return false;
-        }
-        if (edt_last_name.getText().toString().trim().equals("")) {
-            edt_last_name.setError("Not Empty");
-            return false;
-        }
-        if (edt_birthday.getText().toString().trim().equals("")) {
-            edt_birthday.setError("Not Empty");
-            return false;
-        }
-        if (edt_gender.getText().toString().trim().equals("")) {
-            edt_gender.setError("Not Empty");
-            return false;
-        }
-        if (edt_status.getText().toString().trim().equals("")) {
-            edt_status.setError("Not Empty");
-            return false;
-        }
-        if (edt_job.getText().toString().trim().equals("")) {
-            edt_job.setError("Not Empty");
-            return false;
-        }
-        if (edt_home.getText().toString().trim().equals("")) {
-            edt_home.setError("Not Empty");
-            return false;
-        }
-        if (edt_bio.getText().toString().trim().equals("")) {
-            edt_bio.setError("Not Empty");
-            return false;
-        }
-        return true;
-    }
 }
