@@ -16,4 +16,7 @@
     <string name="setting">Setting</string>
     <string name="personal_profile">Thông tin cá nhân</string>
     <string name="save_info">Lưu thông tin</string>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_people">People</string>
+    <string name="tab_explore">Explore</string>
 </resources>
