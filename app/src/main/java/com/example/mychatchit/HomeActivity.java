@@ -42,12 +42,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
-        NightMode = sharedPreferences.getInt("NightModeInt", 1);
-        if(NightMode == AppCompatDelegate.MODE_NIGHT_YES){
-            btn_dark_mode.setChecked(true);
-        }else btn_dark_mode.setChecked(false);
-        AppCompatDelegate.setDefaultNightMode(NightMode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -65,6 +59,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         txt_edit_profile.setOnClickListener(this);
         btn_dark_mode.setOnClickListener(this);
 
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        NightMode = sharedPreferences.getInt("NightModeInt", 1);
+        AppCompatDelegate.setDefaultNightMode(NightMode);
+        if(NightMode == AppCompatDelegate.MODE_NIGHT_YES){
+            btn_dark_mode.setChecked(true);
+        }else btn_dark_mode.setChecked(false);
     }
 
     @Override
