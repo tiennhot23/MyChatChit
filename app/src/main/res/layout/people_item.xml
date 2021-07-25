@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_alignParentStart="true"
+            android:id="@+id/img_avatar"
+            android:src="@drawable/cap"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="@dimen/_200sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_alignBottom="@+id/img_avatar"
+            android:layout_alignTop="@id/img_avatar"
+            android:layout_toLeftOf="@+id/ic_chat"
+            android:layout_toRightOf="@+id/img_avatar"
+            android:id="@+id/txt_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/last_name"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_toEndOf="@+id/img_avatar"
+            android:layout_toStartOf="@+id/ic_chat" />
+        <ImageView
+            android:padding="@dimen/_5sdp"
+            android:layout_alignBottom="@+id/img_avatar"
+            android:layout_alignTop="@id/img_avatar"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/ic_chat"
+            android:src="@drawable/ic_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+</RelativeLayout>

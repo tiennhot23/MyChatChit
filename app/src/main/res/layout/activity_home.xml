@@ -34,6 +34,15 @@
                 android:text="@string/tab_explore"/>
 
         </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewpager"
+            android:layout_below="@+id/tab_layout">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

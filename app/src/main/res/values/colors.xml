@@ -8,14 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#BDBDBD</color>
-    <color name="primary_dark">#9E9E9E</color>
+    <color name="primary">#E0E0E0</color>
+    <color name="primary_dark">#BDBDBD</color>
     <color name="input_background">#ececec</color>
     <color name="icon_background">#20ffffff</color>
     <color name="error">#b00020</color>
     <color name="received_message_background">#090d16</color>
 
-    <color name="main_background">#FAFAFA</color>
+    <color name="main_background">#FFFFFF</color>
     <color name="second_background">#F5F5F5</color>
     <color name="third_background">#EEEEEE</color>
     <color name="four_background">#E0E0E0</color>
