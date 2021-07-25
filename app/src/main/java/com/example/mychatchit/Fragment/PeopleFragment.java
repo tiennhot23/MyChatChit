@@ -2,6 +2,7 @@ package com.example.mychatchit.Fragment;
 
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mychatchit.ChatActivity;
 import com.example.mychatchit.Common.Common;
+import com.example.mychatchit.Listener.OnItemClickListener;
 import com.example.mychatchit.Model.UserModel;
+import com.example.mychatchit.OthersProfileActivity;
 import com.example.mychatchit.R;
 import com.example.mychatchit.ViewHolder.UserViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -32,12 +36,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class PeopleFragment extends Fragment {
+public class PeopleFragment extends Fragment{
 
     @BindView(R.id.search_view)
     public SearchView search_view;
     @BindView(R.id.recycler)
     public RecyclerView recyclerView;
+
+    OnItemClickListener itemClickListener;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
     private FirebaseRecyclerAdapter adapter;
@@ -93,9 +99,27 @@ public class PeopleFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull @NotNull UserViewHolder holder, int position, @NonNull @NotNull UserModel model) {
-                holder.txt_name.setText(new StringBuilder().append(model.getFirstName()).append(" ")
-                        .append(model.getLastName()).toString());
-                Picasso.get().load(model.getAvatar()).into(holder.img_avatar);
+                if(!adapter.getRef(position).getKey().equals(Common.currentUser.getUid())){
+                    holder.txt_name.setText(new StringBuilder().append(model.getFirstName()).append(" ")
+                            .append(model.getLastName()).toString());
+                    Picasso.get().load(model.getAvatar()).into(holder.img_avatar);
+
+                    holder.itemView.setOnClickListener(v -> {
+                        Common.chatUser = model;
+                        Common.chatUser.setUid(adapter.getRef(position).getKey());
+                        startActivity(new Intent(getContext(), OthersProfileActivity.class));
+                    });
+                    holder.ic_chat.setOnClickListener(v -> {
+                        Common.chatUser = model;
+                        Common.chatUser.setUid(adapter.getRef(position).getKey());
+                        String roomId = Common.generateChatRoomId(Common.currentUser.getUid(), Common.chatUser.getUid());
+                        Common.roomSelected = roomId;
+                        startActivity(new Intent(getContext(), ChatActivity.class));
+                    });
+                }else{
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
+                }
             }
         };
 

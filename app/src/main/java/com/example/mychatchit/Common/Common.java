@@ -2,6 +2,8 @@ package com.example.mychatchit.Common;
 
 import com.example.mychatchit.Model.UserModel;
 
+import java.util.Random;
+
 public class Common {
     public static UserModel currentUser = new UserModel();
     public static UserModel chatUser = new UserModel();
@@ -20,4 +22,14 @@ public class Common {
     public static final int MY_CAMERA_REQUEST_CODE = 2;
     public static final int MY_RESULT_LOAD_IMAGE = 3;
     public static final int LOGIN_REQUEST_CODE = 1;
+
+    public static String generateChatRoomId(String a, String b){
+        if(a.compareTo(b) > 0){
+            return new StringBuilder(a).append(b).toString();
+        }else if(a.compareTo(b) < 0){
+            return new StringBuilder(b).append(a).toString();
+        }else{
+            return new StringBuilder("Chat_Your_Self_Error").append(new Random().nextInt()).toString();
+        }
+    }
 }
