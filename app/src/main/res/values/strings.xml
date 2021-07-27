@@ -20,4 +20,5 @@
     <string name="tab_people">People</string>
     <string name="tab_explore">Explore</string>
     <string name="message">Message</string>
+    <string name="time">Time</string>
 </resources>
