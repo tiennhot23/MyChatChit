@@ -65,6 +65,8 @@ public class PeopleAdapter extends FirebaseRecyclerAdapter<UserModel, UserViewHo
             holder.itemView.setVisibility(View.GONE);
             holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
         }
+
+        System.out.println(peoples.size());
     }
 
     @NonNull
@@ -73,6 +75,11 @@ public class PeopleAdapter extends FirebaseRecyclerAdapter<UserModel, UserViewHo
     public UserViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.people_item, parent, false);
         return new UserViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        return peoples.size();
     }
 
     @Override

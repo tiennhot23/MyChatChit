@@ -103,47 +103,52 @@ public class SearchActivity extends AppCompatActivity {
 
     private void loadPeopleList(String text) {
         Query query = FirebaseDatabase.getInstance().getReference().child(Common.USER_REFERENCES)
-                .orderByChild("lastName").startAt(text);
+                .orderByChild("lastName").startAt(text.toUpperCase()).endAt(text.toLowerCase() + "\uf8ff");
         FirebaseRecyclerOptions<UserModel> options =
                 new FirebaseRecyclerOptions.Builder<UserModel>()
                         .setQuery(query, UserModel.class)
                         .build();
 //        peoples = new ArrayList<>();
 //        adapter = new PeopleAdapter(options, this, peoples);
-        adapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>(options) {
-            @NonNull
-            @NotNull
-            @Override
-            public UserViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.people_item, parent, false);
-                return new UserViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull @NotNull UserViewHolder holder, int position, @NonNull @NotNull UserModel model) {
-                if(!adapter.getRef(position).getKey().equals(Common.currentUser.getUid())){
-                    holder.txt_name.setText(new StringBuilder().append(model.getFirstName()).append(" ")
-                            .append(model.getLastName()).toString());
-                    Picasso.get().load(model.getAvatar()).into(holder.img_avatar);
-
-                    holder.itemView.setOnClickListener(v -> {
-                        Common.chatUser = model;
-                        Common.chatUser.setUid(adapter.getRef(position).getKey());
-                        startActivity(new Intent(SearchActivity.this, OthersProfileActivity.class));
-                    });
-                    holder.ic_chat.setOnClickListener(v -> {
-                        Common.chatUser = model;
-                        Common.chatUser.setUid(adapter.getRef(position).getKey());
-                        String roomId = Common.generateChatRoomId(Common.currentUser.getUid(), Common.chatUser.getUid());
-                        Common.roomSelected = roomId;
-                        startActivity(new Intent(SearchActivity.this, ChatActivity.class));
-                    });
-                }else{
-                    holder.itemView.setVisibility(View.GONE);
-                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
+        
+        if(adapter != null ) adapter.updateOptions(options);
+        else{
+            adapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>(options) {
+                @NonNull
+                @NotNull
+                @Override
+                public UserViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+                    View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.people_item, parent, false);
+                    return new UserViewHolder(view);
                 }
-            }
-        };
+
+                @Override
+                protected void onBindViewHolder(@NonNull @NotNull UserViewHolder holder, int position, @NonNull @NotNull UserModel model) {
+                    if(!adapter.getRef(position).getKey().equals(Common.currentUser.getUid())){
+                        holder.txt_name.setText(new StringBuilder().append(model.getFirstName()).append(" ")
+                                .append(model.getLastName()).toString());
+                        Picasso.get().load(model.getAvatar()).into(holder.img_avatar);
+
+                        holder.itemView.setOnClickListener(v -> {
+                            Common.chatUser = model;
+                            Common.chatUser.setUid(adapter.getRef(position).getKey());
+                            startActivity(new Intent(SearchActivity.this, OthersProfileActivity.class));
+                        });
+                        holder.ic_chat.setOnClickListener(v -> {
+                            Common.chatUser = model;
+                            Common.chatUser.setUid(adapter.getRef(position).getKey());
+                            String roomId = Common.generateChatRoomId(Common.currentUser.getUid(), Common.chatUser.getUid());
+                            Common.roomSelected = roomId;
+                            startActivity(new Intent(SearchActivity.this, ChatActivity.class));
+                        });
+                    }else{
+                        holder.itemView.setVisibility(View.GONE);
+                        holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
+                    }
+                }
+            };
+        }
+
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
