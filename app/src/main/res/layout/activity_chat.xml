@@ -105,7 +105,6 @@
         android:padding="8dp"
         android:layout_below="@+id/toolbar_layout"
         android:layout_above="@+id/chat_layout"
-        app:stackFromEnd="true"
-        android:layout_marginTop="4dp"/>
+        app:stackFromEnd="true"/>
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -191,15 +192,64 @@ public class ProfileActivity extends AppCompatActivity {
         //region set default components
         calendar.setTimeInMillis(Common.currentUser.getBirthday());
         edt_first_name.setText(Common.currentUser.getFirstName());
+        edt_first_name.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_first_name.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_first_name.setBackground(null);
+            }
+        });
         edt_last_name.setText(Common.currentUser.getLastName());
+        edt_last_name.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_last_name.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_last_name.setBackground(null);
+            }
+        });
         edt_phone.setText(Common.currentUser.getPhone());
         edt_phone.setEnabled(false);
         edt_birthday.setText(simpleDateFormat.format(calendar.getTime()));
         edt_gender.setText(Common.currentUser.getGender());
+        edt_gender.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_gender.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_gender.setBackground(null);
+            }
+        });
         edt_status.setText(Common.currentUser.getStatus());
+        edt_status.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_status.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_status.setBackground(null);
+            }
+        });
         edt_home.setText(Common.currentUser.getHome());
+        edt_home.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_home.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_home.setBackground(null);
+            }
+        });
         edt_job.setText(Common.currentUser.getJob());
+        edt_job.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_job.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_job.setBackground(null);
+            }
+        });
         edt_bio.setText(Common.currentUser.getBio());
+        edt_bio.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                edt_bio.setBackgroundResource(R.drawable.background_input);
+            }else{
+                edt_bio.setBackground(null);
+            }
+        });
         if(edt_gender.getText().toString().toLowerCase().equals("nam"))
             ic_gender.setImageResource(R.drawable.ic_male);
         else ic_gender.setImageResource(R.drawable.ic_female);
@@ -210,7 +260,10 @@ public class ProfileActivity extends AppCompatActivity {
         });
         edt_birthday.setOnFocusChangeListener((v,hasFocus) -> {
             if (hasFocus) {
+                edt_birthday.setBackgroundResource(R.drawable.background_input);
                 datePicker.show(getSupportFragmentManager(), datePicker.toString());
+            }else{
+                edt_birthday.setBackground(null);
             }
         });
         //endregion

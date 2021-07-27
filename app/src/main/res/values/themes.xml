@@ -24,10 +24,10 @@
     </style>
 
     <style name="AppTheme.AppBarOverLay" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlNormal">@color/primary_text</item>
     </style>
     <style name="ToolbarColoredBackArrow" parent="Theme.MyChatChit">
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorSecondary">@color/primary_text</item>
     </style>
     <style name="AppTheme.PopupOverLay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
