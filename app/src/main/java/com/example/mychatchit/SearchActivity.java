@@ -1,9 +1,10 @@
 package com.example.mychatchit;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,31 +16,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.mychatchit.Adapter.PeopleAdapter;
 import com.example.mychatchit.Common.Common;
-import com.example.mychatchit.Fragment.PeopleFragment;
+import com.example.mychatchit.Entity.HistorySearch;
+import com.example.mychatchit.Model.HistorySearchViewModel;
 import com.example.mychatchit.Model.UserModel;
 import com.example.mychatchit.ViewHolder.UserViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.nex3z.flowlayout.FlowLayout;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -49,10 +50,11 @@ public class SearchActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     @BindView(R.id.edt_search)
     public EditText edt_search;
+    @BindView(R.id.flow_layout)
+    public FlowLayout flowLayout;
 
     private FirebaseRecyclerAdapter adapter;
-//    private PeopleAdapter adapter;
-//    List<UserModel> peoples;
+    public HistorySearchViewModel historySearchViewModel;
 
     @Override
     public void onStart() {
@@ -93,6 +95,36 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        historySearchViewModel = new ViewModelProvider(this).get(HistorySearchViewModel.class);
+        historySearchViewModel.getAll().observe(this, historySearches -> {
+            if(historySearches.size() > 5){
+                historySearchViewModel.delete(historySearches.get(0));
+            }
+            flowLayout.removeAllViews();
+            for(int i=0; i<historySearches.size(); i++){
+                View view = LayoutInflater.from(this).inflate(R.layout.circle_people_item, null);
+                RoundedImageView imageView = view.findViewById(R.id.img_avatar);
+                TextView txt_name = view.findViewById(R.id.txt_name);
+                FirebaseDatabase.getInstance().getReference(Common.USER_REFERENCES)
+                        .child(historySearches.get(i).uid).get()
+                        .addOnSuccessListener(dataSnapshot -> {
+                            if(dataSnapshot.exists()){
+                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                userModel.setUid(dataSnapshot.getKey());
+                                Picasso.get().load(userModel.getAvatar()).into(imageView);
+                                txt_name.setText(userModel.getLastName());
+                                view.setOnClickListener(v -> {
+                                    Common.chatUser = userModel;
+                                    startActivity(new Intent(SearchActivity.this, OthersProfileActivity.class));
+                                });
+                                flowLayout.addView(view);
+                            }
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(this, "[ERROR] load user failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            }
+        });
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -108,9 +140,6 @@ public class SearchActivity extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<UserModel>()
                         .setQuery(query, UserModel.class)
                         .build();
-//        peoples = new ArrayList<>();
-//        adapter = new PeopleAdapter(options, this, peoples);
-        
         if(adapter != null ) adapter.updateOptions(options);
         else{
             adapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>(options) {
@@ -132,6 +161,7 @@ public class SearchActivity extends AppCompatActivity {
                         holder.itemView.setOnClickListener(v -> {
                             Common.chatUser = model;
                             Common.chatUser.setUid(adapter.getRef(position).getKey());
+                            historySearchViewModel.insert(new HistorySearch(Common.chatUser.getUid()));
                             startActivity(new Intent(SearchActivity.this, OthersProfileActivity.class));
                         });
                         holder.ic_chat.setOnClickListener(v -> {

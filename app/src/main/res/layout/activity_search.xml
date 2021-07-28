@@ -40,6 +40,30 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/history_search"
+        android:textColor="@color/primary_text"
+        android:layout_marginVertical="@dimen/_5sdp"/>
+
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/flow_layout"
+        android:layout_margin="5dp"
+        app:flChildSpacingForLastRow="align"
+        app:flMaxRows="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/list_people"
+        android:textColor="@color/primary_text"
+        android:layout_marginVertical="@dimen/_5sdp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

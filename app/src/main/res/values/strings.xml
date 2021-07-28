@@ -22,4 +22,6 @@
     <string name="message">Message</string>
     <string name="time">Time</string>
     <string name="search">Search</string>
+    <string name="history_search">Lịch sử tìm kiếm</string>
+    <string name="list_people">Danh sách người dùng</string>
 </resources>
