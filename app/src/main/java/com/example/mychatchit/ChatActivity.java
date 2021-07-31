@@ -533,6 +533,7 @@ public class ChatActivity extends AppCompatActivity implements IFirebaseLoadFail
         chatInfoModel.setFriendName(Common.getName(Common.chatUser));
         chatInfoModel.setFriendId(Common.chatUser.getUid());
         chatInfoModel.setCreateName(Common.getName(Common.currentUser));
+        chatInfoModel.setAvatar(Common.chatUser.getAvatar());
 
         if(isPicture){
             chatInfoModel.setLastMessage("<Image>");

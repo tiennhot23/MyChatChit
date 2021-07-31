@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_name"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:text="@string/tab_people"
                     android:textColor="@color/primary_text"
                     android:layout_centerInParent="true"/>

@@ -1,8 +1,16 @@
 package com.example.mychatchit.Model;
 
 public class ChatInfoModel {
-    private String createName,createId, friendId, friendName, lastMessage;
+    private String createName,createId, friendId, friendName, lastMessage, avatar;
     private long createDate, lastUpdate;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public ChatInfoModel() {
     }
